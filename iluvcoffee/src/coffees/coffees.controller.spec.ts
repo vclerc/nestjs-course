@@ -15,6 +15,7 @@ describe('CoffeesController', () => {
   });
 
   it('should be defined', () => {
+    fail();
     expect(controller).toBeDefined();
   });
 });
