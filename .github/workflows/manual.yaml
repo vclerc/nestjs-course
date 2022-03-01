@@ -11,4 +11,4 @@ jobs:
   reusable:
     name: Reusable launch
     if: ${{ !github.event.pull_request.draft }}
-    uses: ./.github/scripts/reusable.yaml
+    uses: ./.github/workflows/reusable.yaml

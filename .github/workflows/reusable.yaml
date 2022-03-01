@@ -5,6 +5,7 @@ on:
 jobs:
   witness:
     name: Test Output
+    runs-on: ubuntu-latest
     steps:
       - shell: bash
         run: |
