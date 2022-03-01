@@ -1,0 +1,11 @@
+name: Reusable
+on:
+  workflow_call:
+
+jobs:
+  witness:
+    name: Test Output
+    steps:
+      - shell: bash
+        run: |
+          expr 1 + 1 > output.log
