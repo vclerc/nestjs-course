@@ -10,8 +10,14 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }} # Cancel running actions if branch get pushed
   cancel-in-progress: true
 
-
 jobs:
+  witness_base:
+    name: Just to be sure
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        run: |
+          expr 1 + 1 > output.log
   reusable:
     name: Reusable launch
     uses: ./.github/workflows/reusable.yaml
