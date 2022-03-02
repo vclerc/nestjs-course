@@ -1,0 +1,17 @@
+name: Comment
+
+on:
+  issue_comment:
+    types:
+      - created
+      - edited
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }} # Cancel running actions if branch get pushed
+  cancel-in-progress: true
+
+jobs:
+  reusable:
+    name: Reusable launch
+    if: contains(github.event.comment.html_url, '/pull/')
+    uses: ./.github/scripts/reusable.yaml
