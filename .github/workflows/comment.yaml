@@ -11,13 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  witness_base:
-    name: Just to be sure
-    runs-on: ubuntu-latest
-    steps:
-      - shell: bash
-        run: |
-          expr 1 + 1 > output.log
   reusable:
     name: Reusable launch
+    if: contains(github.event.comment.html_url, '/pull/')
     uses: ./.github/workflows/reusable.yaml
