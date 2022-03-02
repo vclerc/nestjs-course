@@ -14,5 +14,4 @@ concurrency:
 jobs:
   reusable:
     name: Reusable launch
-    if: contains(github.event.comment.html_url, '/pull/')
     uses: ./.github/scripts/reusable.yaml
