@@ -9,5 +9,5 @@ jobs:
     steps:
       - shell: bash
         run: |
-          expr 1 + 1 > output.log
+          ls
           while read line; do echo $line; done < test.txt
