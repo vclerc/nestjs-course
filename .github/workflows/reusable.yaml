@@ -7,6 +7,7 @@ jobs:
     name: Test Output
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
       - name: Read text file
         id: test
         uses: juliangruber/read-file-action@v1
