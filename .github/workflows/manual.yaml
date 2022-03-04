@@ -31,7 +31,7 @@ jobs:
               pull_number: PULL_REQUEST_ID
             }
             try {
-              const result = await github.request(request);
+              const result = await github.rest.pulls.get(request);
               return result.data;
             } catch (err) {
               core.setFailed(`Request failed with error ${err}`)
