@@ -15,3 +15,5 @@ jobs:
     name: Reusable launch
     if: contains(github.event.comment.html_url, '/pull/')
     uses: ./.github/workflows/reusable.yaml
+    with:
+      ref: pull/${{ github.event.pull_request.id }}/head

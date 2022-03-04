@@ -2,10 +2,11 @@ name: Manual
 
 on:
   workflow_dispatch:
-  issue_comment:
-    types:
-      - created
-      - edited
+    inputs:
+      pr_id:
+        description: Pull request id
+        required: true
+        type: string
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }} # Cancel running actions if branch get pushed
@@ -16,3 +17,5 @@ jobs:
     name: Reusable launch
     if: ${{ !github.event.pull_request.draft }}
     uses: ./.github/workflows/reusable.yaml
+    with:
+      ref: pull/${{ inputs.pr_id }}/head

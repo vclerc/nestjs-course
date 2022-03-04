@@ -1,17 +1,30 @@
 name: Reusable
 on:
   workflow_call:
+    inputs:
+      ref:
+        type: string
+        required: true
 
 jobs:
   witness:
     name: Test Output
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ inputs.ref }}
       - name: Read text file
-        id: test
+        id: file-dev
         uses: juliangruber/read-file-action@v1
         with:
           path: ./test.txt
       - name: Echo
-        run: echo "${{ steps.test.outputs.content }}"
+        run: echo "${{ steps.file-dev.outputs.content }}"
+      - name: Read text file
+        id: file-branch
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./test.txt
+      - name: Echo
+        run: echo "${{ steps.file-branch.outputs.content }}"
