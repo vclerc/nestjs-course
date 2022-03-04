@@ -11,7 +11,7 @@ jobs:
     name: Read Pull Request SHA
     runs-on: ubuntu-latest
     outputs:
-      pull_request: ${{ step.information_reading.outputs.result }}
+      pull_request: ${{ steps.information_reading.outputs.result }}
     steps:
       - name: Read informations
         id: information_reading
