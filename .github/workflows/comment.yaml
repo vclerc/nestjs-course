@@ -24,7 +24,7 @@ jobs:
         with:
           script: |
             const { EVENT } = process.env;
-            console.log(JSON.stringify(EVENT, null, 4);
+            console.log(JSON.stringify(EVENT, null, 4));
       - name: Ref definition
         id: ref_definition_2
         uses: actions/github-script@v6
@@ -33,7 +33,7 @@ jobs:
         with:
           script: |
             const { EVENT } = process.env;
-            console.log(JSON.stringify(EVENT, null, 4);
+            console.log(JSON.stringify(EVENT, null, 4));
 
   reusable:
     name: Reusable launch
