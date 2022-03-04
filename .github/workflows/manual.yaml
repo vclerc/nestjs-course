@@ -37,11 +37,12 @@ jobs:
               console.log(result.data);
               console.log('------------------------------------------------------------');
               console.log(result.data.merge_commit_sha)
-              return result.data;
+              return result.data.merge_commit_sha;
             } catch (err) {
               core.setFailed(`Request failed with error ${err}`)
             }
-      - run: echo "${{ steps.ref_definition.outputs.result.merge_commit_sha }}"
+      - run: echo "${{ steps.ref_definition.outputs.result }}"
+      - run: echo "${{ steps.ref_definition.outputs.result.data.merge_commit_sha }}"
       - name: Reusable launch
         uses: ./.github/workflows/reusable.yaml
         with:
