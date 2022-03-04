@@ -3,7 +3,7 @@ name: Manual
 on:
   workflow_dispatch:
     inputs:
-      pr_id:
+      pull_request_id:
         description: Pull request id
         required: true
         type: string
@@ -50,11 +50,11 @@ jobs:
     if: ${{ github.event.issue.pull_request }}
     uses: ./.github/workflows/pull_request_information_reading.yaml
     with:
-      pull_request_id: ${{ github.event.inputs.pr_id }}
+      pull_request_id: ${{ github.event.inputs.pull_request_id }}
 
   reusable:
     name: Reusable launch
     needs: pull_request
     uses: ./.github/workflows/reusable.yaml
     with:
-      ref: ${{ needs.pull_request.outputs.pull_request.merge_commit_sha }}
+      ref: ${{ needs.pull_request.outputs.merge_commit_sha }}
