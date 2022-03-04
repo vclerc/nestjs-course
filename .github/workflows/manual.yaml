@@ -24,6 +24,7 @@ jobs:
           PULL_REQUEST_ID: ${{ github.event.inputs.pr_id }}
         with:
           script: |
+            const { PULL_REQUEST_ID } = process.env
             const request = {
               owner: context.repo.owner,
               repo: context.repo.repo,
