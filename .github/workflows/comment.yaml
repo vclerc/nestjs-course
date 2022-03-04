@@ -11,6 +11,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  display_ref:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ref definition
+      id: ref_definition
+        uses: actions/github-script@v6
+        env:
+          EVENT: ${{ github.event }}
+        with:
+          script: |
+            const { EVENT } = process.env;
+            console.log(JSON.stirngify(EVENT, null, 4);
+
   reusable:
     name: Reusable launch
     if: contains(github.event.comment.html_url, '/pull/')
