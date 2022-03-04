@@ -27,6 +27,6 @@ jobs:
         id: file-branch
         uses: juliangruber/read-file-action@v1
         with:
-          path: ./test.txt
+          path: ./test-branch.txt
       - name: Echo
         run: echo "${{ steps.file-branch.outputs.content }}"

@@ -21,7 +21,7 @@ jobs:
         id: ref_definition
         uses: actions/github-script@v3
         with:
-          scripts: |
+          script: |
             const request = {
               owner: context.repor.owner,
               repo: context.repo.repo,
