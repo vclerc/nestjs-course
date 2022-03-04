@@ -12,6 +12,7 @@ concurrency:
 
 jobs:
   display_ref:
+    name: display-ref-event
     runs-on: ubuntu-latest
     steps:
       - name: Ref definition
