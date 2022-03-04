@@ -35,7 +35,7 @@ jobs:
             console.log(JSON.stringify(request, null, 4));
             try {
               const result = await github.rest.pulls.get(request);
-              return merge_commit_sha: result.data.merge_commit_sha;
+              return result.data.merge_commit_sha;
             } catch (err) {
               core.setFailed(`Pull request retireval failed with error ${err}`)
             }
