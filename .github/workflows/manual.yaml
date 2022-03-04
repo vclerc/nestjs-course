@@ -42,8 +42,7 @@ jobs:
               core.setFailed(`Request failed with error ${err}`)
             }
       - run: echo "${{ steps.ref_definition.outputs.result }}"
-      - run: echo "${{ steps.ref_definition.outputs.result.data.merge_commit_sha }}"
       - name: Reusable launch
         uses: ./.github/workflows/reusable.yaml
         with:
-          ref: ${{ steps.ref_definition.outputs.result.merge_commit_sha }}
+          ref: ${{ steps.ref_definition.outputs.result }}
