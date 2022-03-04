@@ -35,9 +35,17 @@ jobs:
             const { EVENT } = process.env;
             console.log(JSON.stringify(EVENT, null, 4));
 
+  pull_request:
+    name: Get Pull Request info
+    if: ${{ github.event.issue.pull_request }}
+    uses: ./.github/workflows/pull_request_information_reading.yaml
+    with:
+      pull_request_id: ${{ github.event.issue.number }}
+
   reusable:
     name: Reusable launch
     if: ${{ github.event.issue.pull_request }}
+    needs: pull_request
     uses: ./.github/workflows/reusable.yaml
     with:
-      ref: ${{ github.event.pull_request.merge_commit_sha }}
+      ref: ${{ needs.pull_request.outputs.pull_request.merge_commit_sha }}

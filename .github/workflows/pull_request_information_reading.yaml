@@ -1,0 +1,34 @@
+name: Pull request information reading
+on:
+  workflow_call:
+    inputs:
+      pull_request_id:
+        type: number
+        required: true
+
+jobs:
+  pull_request_read:
+    name: Read Pull Request SHA
+    runs-on: ubuntu-latest
+    outputs:
+      pull_request: ${{ step.information_reading.outputs.result }}
+    steps:
+      - name: Read informations
+        id: information_reading
+        uses: actions/github-script@v6
+        env:
+          PULL_REQUEST_ID: ${{ github.event.inputs.pr_id }}
+        with:
+          script: |
+            const { PULL_REQUEST_ID } = process.env
+            const request = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: PULL_REQUEST_ID
+            }
+            try {
+              const result = await github.rest.pulls.get(request);
+              return {merge_commit_sha: result.data.merge_commit_sha};
+            } catch (err) {
+              core.setFailed(`Pull request retireval failed with error ${err}`)
+            }

@@ -44,9 +44,17 @@ jobs:
               core.setFailed(`Request failed with error ${err}`)
             }
       - run: echo "${{ steps.ref_definition.outputs.result }}"
+
+  pull_request:
+    name: Get Pull Request info
+    if: ${{ github.event.issue.pull_request }}
+    uses: ./.github/workflows/pull_request_information_reading.yaml
+    with:
+      pull_request_id: ${{ github.event.inputs.pr_id }}
+
   reusable:
     name: Reusable launch
-    needs: manual_tests
+    needs: pull_request
     uses: ./.github/workflows/reusable.yaml
     with:
-      ref: ${{ needs.manual_tests.outputs.ref }}
+      ref: ${{ needs.pull_request.outputs.pull_request.merge_commit_sha }}
