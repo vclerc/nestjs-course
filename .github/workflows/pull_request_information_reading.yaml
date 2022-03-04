@@ -26,6 +26,7 @@ jobs:
               repo: context.repo.repo,
               pull_number: PULL_REQUEST_ID
             }
+            console.log(JSON.stringify(request, null, 4));
             try {
               const result = await github.rest.pulls.get(request);
               return {merge_commit_sha: result.data.merge_commit_sha};
