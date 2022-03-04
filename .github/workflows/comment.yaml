@@ -16,4 +16,4 @@ jobs:
     if: contains(github.event.comment.html_url, '/pull/')
     uses: ./.github/workflows/reusable.yaml
     with:
-      ref: pull/${{ github.event.pull_request.head.sha }}/head
+      ref: ${{ github.event.pull_request.head.sha }}
