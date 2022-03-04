@@ -32,6 +32,11 @@ jobs:
             }
             try {
               const result = await github.rest.pulls.get(request);
+              console.log(JSON.stringify(result.data, null, 4));
+              console.log('------------------------------------------------------------');
+              console.log(result.data);
+              console.log('------------------------------------------------------------');
+              console.log(result.data.merge_commit_sha)
               return result.data;
             } catch (err) {
               core.setFailed(`Request failed with error ${err}`)
