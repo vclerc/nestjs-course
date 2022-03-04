@@ -27,7 +27,7 @@ jobs:
             const request = {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: ${PULL_REQUEST_ID}
+              pull_number: PULL_REQUEST_ID
             }
             try {
               const result = await github.pulls.get(request);
