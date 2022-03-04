@@ -5,6 +5,10 @@ on:
       pull_request_id:
         type: string
         required: true
+    outputs:
+      pull_request:
+        description: "Pull request informations"
+        value: ${{ jobs.pull_request_read.outputs.pull_request }}
 
 jobs:
   pull_request_read:
