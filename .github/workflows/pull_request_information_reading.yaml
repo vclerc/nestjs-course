@@ -39,3 +39,4 @@ jobs:
             } catch (err) {
               core.setFailed(`Pull request retireval failed with error ${err}`)
             }
+          result-encoding: string
