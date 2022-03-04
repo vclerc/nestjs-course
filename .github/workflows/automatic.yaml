@@ -9,6 +9,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  ref:
+    name: print ref
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.event.pull_request.merge_commit_sha }}
+
   reusable:
     name: Reusable launch
     if: ${{ !github.event.pull_request.draft }}

@@ -13,39 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  manual_tests:
-    name: Manual tests
-    runs-on: ubuntu-latest
-    outputs:
-      ref: ${{ steps.ref_definition.outputs.result }}
-    steps:
-      - name: Ref definition
-        id: ref_definition
-        uses: actions/github-script@v6
-        env:
-          PULL_REQUEST_ID: ${{ github.event.inputs.pull_request_id }}
-        with:
-          script: |
-            const { PULL_REQUEST_ID } = process.env
-            const request = {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: PULL_REQUEST_ID
-            }
-            try {
-              const result = await github.rest.pulls.get(request);
-              console.log(JSON.stringify(result.data, null, 4));
-              console.log('------------------------------------------------------------');
-              console.log(result.data);
-              console.log('------------------------------------------------------------');
-              console.log(result.data.merge_commit_sha)
-              return result.data.merge_commit_sha;
-            } catch (err) {
-              core.setFailed(`Request failed with error ${err}`)
-            }
-      - run: echo "${{ steps.ref_definition.outputs.result }}"
-
-  pull_request:
+  ref:
     name: Get Pull Request info
     uses: ./.github/workflows/pull_request_information_reading.yaml
     with:
@@ -53,7 +21,7 @@ jobs:
 
   reusable:
     name: Reusable launch
-    needs: pull_request
+    needs: ref
     uses: ./.github/workflows/reusable.yaml
     with:
-      ref: ${{ needs.pull_request.outputs.merge_commit_sha }}
+      ref: ${{ needs.ref.outputs.merge_commit_sha }}

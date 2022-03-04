@@ -11,36 +11,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  display_ref:
-    name: display-ref-event
-    if: ${{ github.event.issue.pull_request }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Ref definition
-        id: ref_definition
-        uses: actions/github-script@v6
-        env:
-          EVENT: ${{ github.event.issue.number }}
-        with:
-          script: |
-            const { EVENT } = process.env;
-            console.log(JSON.stringify(EVENT, null, 4));
-
   pull_request:
     name: Get Pull Request info
     if: ${{ github.event.issue.pull_request }}
     uses: ./.github/workflows/pull_request_information_reading.yaml
     with:
       pull_request_id: ${{ github.event.issue.number }}
-
-  check:
-    name: Check
-    runs-on: ubuntu-latest
-    if: ${{ github.event.issue.pull_request }}
-    needs: pull_request
-    steps:
-      - run: echo ${{ needs.pull_request.outputs.merge_commit_sha }}
-
 
   reusable:
     name: Reusable launch
