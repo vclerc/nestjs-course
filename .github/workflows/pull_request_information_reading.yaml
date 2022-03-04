@@ -14,12 +14,12 @@ jobs:
       pull_request: ${{ steps.information_reading.outputs.result }}
     steps:
       - run:
-          echo ${{ github.event.inputs.pr_id }}
+          echo ${{ github.event.inputs.pull_request_id }}
       - name: Read informations
         id: information_reading
         uses: actions/github-script@v6
         env:
-          PULL_REQUEST_ID: ${{ github.event.inputs.pr_id }}
+          PULL_REQUEST_ID: ${{ github.event.inputs.pull_request_id }}
         with:
           script: |
             const { PULL_REQUEST_ID } = process.env
