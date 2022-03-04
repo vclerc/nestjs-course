@@ -13,21 +13,31 @@ concurrency:
 jobs:
   display_ref:
     name: display-ref-event
+    if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
       - name: Ref definition
-        id: ref_definition
+        id: ref_definition_2
         uses: actions/github-script@v6
         env:
-          EVENT: ${{ github.event }}
+          EVENT: ${{ github.event.event.number }}
         with:
           script: |
             const { EVENT } = process.env;
-            console.log(JSON.stirngify(EVENT, null, 4);
+            console.log(JSON.stringify(EVENT, null, 4);
+      - name: Ref definition
+        id: ref_definition_2
+        uses: actions/github-script@v6
+        env:
+          EVENT: ${{ github.event.event.merge_commit_sha }}
+        with:
+          script: |
+            const { EVENT } = process.env;
+            console.log(JSON.stringify(EVENT, null, 4);
 
   reusable:
     name: Reusable launch
-    if: contains(github.event.comment.html_url, '/pull/')
+    if: ${{ github.event.issue.pull_request }}
     uses: ./.github/workflows/reusable.yaml
     with:
       ref: ${{ github.event.pull_request.merge_commit_sha }}
