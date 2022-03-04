@@ -16,6 +16,8 @@ jobs:
   manual_tests:
     name: Manual tests
     runs-on: ubuntu-latest
+    outputs:
+      ref: ${{ steps.ref_definition.outputs.result }}
     steps:
       - name: Ref definition
         id: ref_definition
@@ -47,4 +49,4 @@ jobs:
     needs: manual_tests
     uses: ./.github/workflows/reusable.yaml
     with:
-      ref: ${{ needs.manual_tests.steps.ref_definition.outputs.result }}
+      ref: ${{ needs.manual_tests.outputs.ref }}
