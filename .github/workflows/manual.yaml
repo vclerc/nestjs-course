@@ -42,7 +42,9 @@ jobs:
               core.setFailed(`Request failed with error ${err}`)
             }
       - run: echo "${{ steps.ref_definition.outputs.result }}"
-      - name: Reusable launch
-        uses: ./.github/workflows/reusable.yaml
-        with:
-          ref: ${{ steps.ref_definition.outputs.result }}
+  reusable:
+    name: Reusable launch
+    needs: manual_tests
+    uses: ./.github/workflows/reusable.yaml
+    with:
+      ref: ${{ needs.manual_tests.steps.ref_definition.outputs.result }}
