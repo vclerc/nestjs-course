@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ref definition
-      id: ref_definition
+        id: ref_definition
         uses: actions/github-script@v6
         env:
           EVENT: ${{ github.event }}
