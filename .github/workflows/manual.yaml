@@ -23,7 +23,7 @@ jobs:
         id: ref_definition
         uses: actions/github-script@v6
         env:
-          PULL_REQUEST_ID: ${{ github.event.inputs.pr_id }}
+          PULL_REQUEST_ID: ${{ github.event.inputs.pull_request_id }}
         with:
           script: |
             const { PULL_REQUEST_ID } = process.env
@@ -47,7 +47,6 @@ jobs:
 
   pull_request:
     name: Get Pull Request info
-    if: ${{ github.event.issue.pull_request }}
     uses: ./.github/workflows/pull_request_information_reading.yaml
     with:
       pull_request_id: ${{ github.event.inputs.pull_request_id }}
