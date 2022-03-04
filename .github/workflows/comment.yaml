@@ -33,6 +33,15 @@ jobs:
     with:
       pull_request_id: ${{ github.event.issue.number }}
 
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    if: ${{ github.event.issue.pull_request }}
+    needs: pull_request
+    steps:
+      - run: echo ${{ needs.pull_request.outputs.pull_request.merge_commit_sha }}
+
+
   reusable:
     name: Reusable launch
     if: ${{ github.event.issue.pull_request }}
