@@ -36,7 +36,6 @@ jobs:
   reusable:
     name: Reusable launch
     if: ${{ github.event.issue.pull_request }}
-    needs: pull_request
     uses: ./.github/workflows/reusable.yaml
     with:
       # ref: ${{ needs.pull_request.outputs.pull_request.merge_commit_sha }}
