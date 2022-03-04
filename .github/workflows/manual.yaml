@@ -13,9 +13,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  reusable:
-    name: Reusable launch
-    if: ${{ !github.event.pull_request.draft }}
-    uses: ./.github/workflows/reusable.yaml
-    with:
-      ref: ${{ github.event.inputs.pr_id }}
+  manual_tests:
+    name: Manual tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ref definition
+        id: ref_definition
+        uses: actions/github-script@v3
+        with:
+          scripts: |
+            const request = {
+              owner: context.repor.owner,
+              repo: context.repo.repo,
+              pull_number: ${{ github.event.inputs.pr_id }}
+            }
+            try {
+              const result = await github.pulls.get(request);
+              return result.data;
+            } catch (err) {
+              core.setFailed(`Request failed with error ${err}`)
+            }
+      - run: echo "${{ steps.ref_definition.outputs.result }}"
+      - name: Reusable launch
+        uses: ./.github/workflows/reusable.yaml
+        with:
+          ref: ${{ github.event.inputs.pr_id }}
