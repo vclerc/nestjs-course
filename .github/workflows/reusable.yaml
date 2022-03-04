@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ref
-        run: echo "current ref is ${{ inputs.ref }} or ${{ github.event.inputs.ref }}"
-      - uses: actions/checkout@v2
+        run: echo "current ref is ${{ inputs.ref }}"
+      - uses: actions/checkout@v3
         with:
           ref: ${{ inputs.ref }}
       - name: Read text file

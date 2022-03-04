@@ -14,4 +14,4 @@ jobs:
     if: ${{ !github.event.pull_request.draft }}
     uses: ./.github/workflows/reusable.yaml
     with:
-      ref: pull/${{ github.event.pull_request.id }}/head
+      ref: pull/${{ github.event.pull_request.head.sha }}/head
