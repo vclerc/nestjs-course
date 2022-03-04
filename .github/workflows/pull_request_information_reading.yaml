@@ -6,16 +6,16 @@ on:
         type: string
         required: true
     outputs:
-      pull_request:
-        description: "Pull request informations"
-        value: ${{ jobs.pull_request_read.outputs.pull_request }}
+      merge_commit_sha:
+        description: "Pull request merge commit sha"
+        value: ${{ jobs.pull_request_read.outputs.merge_commit_sha }}
 
 jobs:
   pull_request_read:
     name: Read Pull Request SHA
     runs-on: ubuntu-latest
     outputs:
-      pull_request: ${{ steps.information_reading.outputs.result }}
+      merge_commit_sha: ${{ steps.information_reading.outputs.result }}
     steps:
       - run:
           echo ${{ inputs.pull_request_id }}
@@ -35,7 +35,7 @@ jobs:
             console.log(JSON.stringify(request, null, 4));
             try {
               const result = await github.rest.pulls.get(request);
-              return {merge_commit_sha: result.data.merge_commit_sha};
+              return merge_commit_sha: result.data.merge_commit_sha;
             } catch (err) {
               core.setFailed(`Pull request retireval failed with error ${err}`)
             }
