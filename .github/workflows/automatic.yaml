@@ -14,12 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ github.event.issue.number }}
+      - run: echo ${{ github.event.issue }}
+      - run: echo ${{ github.event.pull_request }}
 
   ref:
     name: Get Pull Request info
     uses: ./.github/workflows/pull_request_information_reading.yaml
     with:
-      pull_request_id: ${{ github.event.inputs.pull_request_id }}
+      pull_request_id: ${{ github.event.issue.number }}
 
   reusable:
     name: Reusable launch
