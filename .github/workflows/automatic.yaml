@@ -9,32 +9,24 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  ref:
+  print:
     name: print ref
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ github.event.pull_request.merge_commit_sha }}
-      - name: Read informations
-        id: information_reading
-        uses: actions/github-script@v6
-        env:
-          PULL_REQUEST_ID: ${{ github.event.pull_request }}
-        with:
-          script: |
-            const { PULL_REQUEST_ID } = process.env
-            const request = {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: PULL_REQUEST_ID
-            }
-            console.log(JSON.stringify(request, null, 4));
-          result-encoding: string
+      - run: echo ${{ github.event.issue-number }}
+
+  ref:
+    name: Get Pull Request info
+    uses: ./.github/workflows/pull_request_information_reading.yaml
+    with:
+      pull_request_id: ${{ github.event.inputs.pull_request_id }}
 
   reusable:
     name: Reusable launch
+    needs: ref
     if: ${{ !github.event.pull_request.draft }}
     uses: ./.github/workflows/reusable.yaml
     with:
-      ref: ${{ github.event.pull_request.merge_commit_sha }}
+      ref: ${{ needs.ref.outputs.merge_commit_sha }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
