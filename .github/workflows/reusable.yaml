@@ -6,7 +6,7 @@ on:
         type: string
         required: true
     secrets:
-      GITHUB_TOKEN:
+      token:
         required: true
 
 jobs:
@@ -34,7 +34,7 @@ jobs:
       - name: Echo
         run: echo "${{ steps.file-branch.outputs.content }}"
       - uses: LouisBrunner/checks-action@v1.1.1
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.token }}
         if: always()
         with:
           name: Check 1

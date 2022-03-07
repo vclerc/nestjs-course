@@ -26,4 +26,4 @@ jobs:
     with:
       ref: ${{ needs.ref.outputs.merge_commit_sha }}
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      token: ${{ secrets.GITHUB_TOKEN }}
