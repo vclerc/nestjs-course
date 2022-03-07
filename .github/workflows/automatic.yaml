@@ -15,19 +15,19 @@ jobs:
     steps:
       - run: echo ${{ github.event.pull_request }}
 
-  ref:
-    name: Get Pull Request info
-    uses: ./.github/workflows/pull_request_information_reading.yaml
-    with:
-      pull_request_id: ${{ github.event.pull_request.number }}
+#  ref:
+#    name: Get Pull Request info
+    #    uses: ./.github/workflows/pull_request_information_reading.yaml
+      #    with:
+  #      pull_request_id: ${{ github.event.pull_request.number }}
 
-  reusable:
-    name: Reusable launch
-    needs: ref
-    if: ${{ !github.event.pull_request.draft }}
-    uses: ./.github/workflows/reusable.yaml
-    with:
-      ref: ${{ needs.ref.outputs.merge_commit_sha }}
-      create_check: true
-    secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
+    #  reusable:
+    #    name: Reusable launch
+    #    needs: ref
+    #    if: ${{ !github.event.pull_request.draft }}
+    #    uses: ./.github/workflows/reusable.yaml
+      #    with:
+      #      ref: ${{ needs.ref.outputs.merge_commit_sha }}
+    #      create_check: true
+      #    secrets:
+#      token: ${{ secrets.GITHUB_TOKEN }}
