@@ -34,8 +34,8 @@ jobs:
       - name: Echo
         run: echo "${{ steps.file-branch.outputs.content }}"
       - uses: LouisBrunner/checks-action@v1.1.1
-        token: ${{ secrets.token }}
         if: always()
         with:
+          token: ${{ secrets.token }}
           name: Check 1
           conclusion: success
