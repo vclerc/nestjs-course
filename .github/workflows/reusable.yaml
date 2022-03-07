@@ -5,7 +5,7 @@ on:
       ref:
         type: string
         required: true
-      create_check:
+      required_check:
         type: boolean
         required: false
         default: false
@@ -38,8 +38,14 @@ jobs:
       - name: Echo
         run: echo "${{ steps.file-branch.outputs.content }}"
       - uses: LouisBrunner/checks-action@v1.1.1
-        if: ${{ inputs.create_check }}
+        if: ${{ inputs.required_check }}
         with:
           token: ${{ secrets.token }}
           name: Check 1
+          conclusion: success
+      - uses: LouisBrunner/checks-action@v1.1.1
+        if: ${{ !inputs.required_check }}
+        with:
+          token: ${{ secrets.token }}
+          name: Check 2
           conclusion: success
