@@ -5,6 +5,10 @@ on:
       ref:
         type: string
         required: true
+      create_check:
+        type: boolean
+        required: true
+        default: false
     secrets:
       token:
         required: true
@@ -34,7 +38,7 @@ jobs:
       - name: Echo
         run: echo "${{ steps.file-branch.outputs.content }}"
       - uses: LouisBrunner/checks-action@v1.1.1
-        if: always()
+        if: ${{ inputs.create_check }}
         with:
           token: ${{ secrets.token }}
           name: Check 1

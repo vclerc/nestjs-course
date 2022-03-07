@@ -28,5 +28,6 @@ jobs:
     uses: ./.github/workflows/reusable.yaml
     with:
       ref: ${{ needs.ref.outputs.merge_commit_sha }}
+      create_check: true
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
